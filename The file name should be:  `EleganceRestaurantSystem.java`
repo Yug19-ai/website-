@@ -1,0 +1,110 @@
+// File Name: EleganceRestaurantSystem.java
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Reservation {
+    String customerName;
+    String date;
+    int guests;
+    String status;
+
+    Reservation(String customerName, String date, int guests, String status) {
+        this.customerName = customerName;
+        this.date = date;
+        this.guests = guests;
+        this.status = status;
+    }
+
+    void displayReservation() {
+        System.out.println("-----------------------------------");
+        System.out.println("Customer Name : " + customerName);
+        System.out.println("Reservation Date : " + date);
+        System.out.println("Guests : " + guests);
+        System.out.println("Status : " + status);
+    }
+}
+
+public class EleganceRestaurantSystem {
+
+    static ArrayList<Reservation> reservations = new ArrayList<>();
+
+    public static void addReservation() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("\n===== New Reservation =====");
+
+        System.out.print("Enter Customer Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Reservation Date: ");
+        String date = sc.nextLine();
+
+        System.out.print("Enter Number of Guests: ");
+        int guests = sc.nextInt();
+        sc.nextLine();
+
+        Reservation reservation = new Reservation(
+                name,
+                date,
+                guests,
+                "Confirmed"
+        );
+
+        reservations.add(reservation);
+
+        System.out.println("\nReservation Successfully Added!");
+    }
+
+    public static void viewReservations() {
+
+        if (reservations.isEmpty()) {
+            System.out.println("\nNo Reservations Found.");
+            return;
+        }
+
+        System.out.println("\n===== Reservation List =====");
+
+        for (Reservation r : reservations) {
+            r.displayReservation();
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int choice;
+
+        do {
+            System.out.println("\n=================================");
+            System.out.println("   ÉLÉGANCE RESTAURANT SYSTEM");
+            System.out.println("=================================");
+            System.out.println("1. Add Reservation");
+            System.out.println("2. View Reservations");
+            System.out.println("3. Exit");
+            System.out.print("Enter Your Choice: ");
+
+            choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    addReservation();
+                    break;
+
+                case 2:
+                    viewReservations();
+                    break;
+
+                case 3:
+                    System.out.println("\nThank You For Using ÉLÉGANCE Restaurant System");
+                    break;
+
+                default:
+                    System.out.println("\nInvalid Choice!");
+            }
+
+        } while (choice != 3);
+    }
+}
